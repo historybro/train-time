@@ -1,0 +1,23 @@
+.card-header {
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.jumbotron {
+    text-align: center;
+}
+
+h1 {
+    font-weight: bold;
+}
+
+body {
+    background-image: url("../images/bg.jpg");
+}
+
+#currenttime {
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+}

@@ -83,7 +83,7 @@ database.ref().on("child_added", function (childSnapshot) {
     var newRow = $("<tr>").append(
         $("<td>").text(name),
         $("<td>").text(destination),
-        $("<td>").text("Every " + frequency + " minutes"),
+        $("<td>").text(frequency),
         $("<td>").text(nextTrainCon),
         $("<td>").text(timeTillTrain)
     );
@@ -128,19 +128,15 @@ firebase.auth().signInWithPopup(provider).then(function (result) {
     // ...
 });
 
-//github auth
-var provider = new firebase.auth.GithubAuthProvider();
-provider.addScope('repo');
-provider.setCustomParameters({
-    'allow_signup': 'false'
-});
-firebase.auth().signInWithPopup(provider).then(function(result) {
-    // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-    var token = result.credential.accessToken;
+firebase.auth().getRedirectResult().then(function (result) {
+    if (result.credential) {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = result.credential.accessToken;
+        // ...
+    }
     // The signed-in user info.
     var user = result.user;
-    // ...
-  }).catch(function(error) {
+}).catch(function (error) {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
@@ -151,11 +147,6 @@ firebase.auth().signInWithPopup(provider).then(function(result) {
     // ...
 });
 
-//testing area...
-
-
-//load the current time, and then every 15s update it, update train times every minute
-$(document).ready(function(){
-    currentTime();
-    window.setInterval(currentTime, 15000);
-});
+//load the current time, and then every 30s update it
+currentTime();
+window.setInterval(currentTime, 30000);
